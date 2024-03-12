@@ -1,11 +1,11 @@
-//
-//  main.swift
-//  MyBaseballgame
-//
-//  Created by 서혜림 on 3/12/24.
-//
+let game = BaseballGame()
+game.start()
 
-import Foundation
-
-print("Hello, World!")
-
+class BaseballGame {
+    func start() {
+        let answer = makeAnswer()
+    }
+    
+    func makeAnswer() -> Int {
+    }
+}
