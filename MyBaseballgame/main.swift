@@ -8,7 +8,7 @@ class BaseballGame {
         playGame()
     }
     
-    private func makeAnswer() -> [Int] {
+     func makeAnswer() -> [Int] {
         var numbers = [Int](1...9)  // 1부터 9까지 Int값 선언
         var gameAnswer = [Int]()  // 게임 정답값 선언
         
@@ -20,21 +20,26 @@ class BaseballGame {
         
         return gameAnswer
     }
-    
+    func userInput(userInput: Int) -> [Int] {
+        
+    }
     func playGame() {
-        print("3자리 숫자를 입력해주세요") // 게임 안내문
+        print("3자리 숫자를 맞춰주세요.") // 게임 안내문
         
         while true {
-        guard let input = readLine(), // input 입력
-                let userInput = Int(input),
-                input.count == 3 else {
-            print("error")
-            continue // 잘못된 입력 시 에러, 반복
+            guard let input = readLine(), // input 입력
+                  input.count == 3 else {
+                print("3자리 숫자로만 다시 입력해주세요.")
+                continue // 잘못된 입력 시 에러, 반복
+            }
+            
+            var userInput = Int(input)
         
             if userInput == answer { // 정답 확인
-                            print("정답입니다")
-                            break // 정답을 맞췄으므로 반복 종료
+                print("정답입니다!")
+                break // 정답 확인 후 반복 종료
+            }
+            
         }
-        
     }
 }
