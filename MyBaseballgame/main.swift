@@ -8,61 +8,57 @@ class BaseballGame {
     }
     
     func makeAnswer() -> [Int] {
-        var numbers = Array(1...9)              // 1부터 9까지의 숫자 배열
-        var gameAnswer = [Int]()                // 게임 정답값을 담을 배열
+        var numbers = Array(0...9)               // 0...9까지 숫자 배열
+        var gameAnswer = [Int]()                 // 정답 값
         
-        for _ in 0..<3 { // 3번 반복해서 정답값 생성
-            let index = Int.random(in: 0...9)          // 0부터 numbers 배열 크기-1 사이의 랜덤 인덱스 선택
-            gameAnswer.append(numbers[index])          // 랜덤 인덱스에 해당하는 숫자를 정답 배열에 추가
-            numbers.remove(at: index)                  // 정답 배열에 추가한 숫자를 numbers 배열에서 제거
+        for _ in 0..<3 {                               // 3번 반복
+            let index = Int.random(in: 0...9)          // 0...9까지 인덱스 값
+            gameAnswer.append(numbers[index])          // 정답 값에 인덱스 값 추가
+            numbers.remove(at: index)                  // 넘버스에서 인덱스 값 제거
         }
         
-        return gameAnswer // 생성된 정답 배열 반환
+        return gameAnswer                              // 정답 값 반환
     }
     
     func playGame() {
-        print("3자리 숫자를 맞춰주세요.") // 게임 안내문
-        answer = makeAnswer() // 정답 생성
+        print("3자리 숫자를 맞춰주세요.")                    // 게임 시작 안내
+        answer = makeAnswer()                          // 정답 값 생성
         
         while true {
-            guard let userInput = readLine(), userInput.count == 3 else {
+            guard let userInput = readLine()             // 유저 인풋 값 입력
+                    , userInput.count == 3 else {
                 print("3자리 숫자로만 다시 입력해주세요.")
-                continue // 잘못된 입력 시 에러, 반복
+                continue                                 // 잘못된 입력한 경우 에러, 반복
             }
             
-            var userNumbers = [Int]()
-            for char in userInput {
-                if let number = Int(String(char)) {
+            var userNumbers = [Int]()                   // 유저 넘버 선언
+            for i in userInput {
+                if let number = Int(String(i)) {        // 값이 숫자인지 확인
                     userNumbers.append(number)
                 } else {
-                    print("숫자로만 입력해주세요.")
+                    print("숫자로만 입력해주세요.")           // 숫자가 아닌 경우 에러, 반복
                     continue
                 }
             }
             
-            guard userNumbers.count == 3 else {
-                print("3자리 숫자로만 다시 입력해주세요.")
-                continue
-            }
-            
             var strike = 0
-            var ball = 0
+            var ball = 0                // 스트라이크, 볼 값 초기화
             
             for (index, value) in userNumbers.enumerated() {
                 if answer.contains(value) {
                     if answer[index] == value {
-                        strike += 1 // 값과 위치가 일치하면 스트라이크 증가
+                        strike += 1                   // 위치, 값 일치 시 스트라이크 += 1
                     } else {
-                        ball += 1 // 값은 일치하지만 위치가 다르면 볼 증가
+                        ball += 1                     // 값만 일치 시 볼 += 1
                     }
                 }
             }
             
-            print("\(strike) 스트라이크, \(ball) 볼")
+            print("\(strike) 스트라이크, \(ball) 볼")    // 스트라이크, 볼 값 출력
             
-            if userNumbers == answer { // 정답 확인
+            if userNumbers == answer {               // 정답 확인
                 print("정답입니다!")
-                break // 정답 확인 후 반복 종료
+                break                                // 정답 확인 후 반복 종료
             }
             
         }
