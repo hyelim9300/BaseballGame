@@ -19,7 +19,7 @@ class BaseballGame {
         
         return gameAnswer                              // 정답 값 반환
     }
-    
+    // MARK: --- lv. 1
     func playGame() {
         print("3자리 숫자를 맞춰주세요.")                    // 게임 시작 안내
         answer = makeAnswer()                          // 정답 값 생성
@@ -65,6 +65,6 @@ class BaseballGame {
         
     }
 }
-
+// MARK: --- lv.2
 var game = BaseballGame()
 game.start()
